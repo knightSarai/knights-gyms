@@ -1,1 +1,28 @@
-<app-workout></app-workout>
+<div class="row">
+  <div class="col-xs-12 mt-1 d-flex justify-content-end">
+    <button class="btn btn-sm btn-outline-secondary">+ New Workout</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date</th>
+        <th scope="col">Details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let workout of workouts">
+        <th>{{ workout.id }}</th>
+        <td>{{ workout.name }}</td>
+        <td>{{ workout.date | date }}</td>
+        <td>{{ workout.details }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <app-workout></app-workout>
+  </div>
+</div>
