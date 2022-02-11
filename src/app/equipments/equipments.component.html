@@ -1,7 +1,17 @@
-<div class="row">
+<div class="rows">
   <div class="col-xs-10">
     <app-equipment-edit></app-equipment-edit>
     <hr>
-    <p>Equipments List</p>
+    <div class="col-md-4">
+      <div class="list-group">
+        <a href="#"
+           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+           *ngFor="let equipment of equipments"
+        >
+          {{equipment.name}}
+          <span class="badge bg-primary rounded-pill">{{equipment.amount}}</span>
+        </a>
+      </div>
+    </div>
   </div>
 </div>
