@@ -1,1 +1,12 @@
-<p>workout works!</p>
+<a href="#"
+   class="list-group-item list-group-item-action"
+>
+  <div class="d-flex w-100 justify-content-between">
+    <h5 class="mb-1">
+      <small class="text-muted">#{{ workout.id }}</small>
+      {{ workout.name }}
+    </h5>
+    <small class="text-muted">{{ workout.date | date }}</small>
+  </div>
+  <p class="mb-1">{{ workout.details }}</p>
+</a>
