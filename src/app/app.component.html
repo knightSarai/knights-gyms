@@ -1,5 +1,5 @@
-<app-header></app-header>
-<div class="container-xxl">
-  <app-workouts></app-workouts>
-  <app-equipments></app-equipments>
+<app-header (pageSelected)="onPageSelected($event)"></app-header>
+<div class="container-xxl mt-4">
+  <app-workouts *ngIf="pageName === 'Workouts'"></app-workouts>
+  <app-equipments *ngIf="pageName === 'Equipments'"></app-equipments>
 </div>
