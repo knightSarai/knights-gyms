@@ -18,4 +18,8 @@ export class EquipmentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onEquipmentAdded(equipment: Equipment) {
+    this.equipments.push(equipment);
+  }
+
 }
