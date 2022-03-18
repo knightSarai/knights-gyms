@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Workout} from "@models/workouts.model";
 
 @Component({
   selector: 'app-workouts',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./workouts.component.css']
 })
 export class WorkoutsComponent implements OnInit {
+  selectedWorkout: Workout;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
+  }
+
+  onWorkoutSelected(workout: Workout) {
+    console.log("Workout selected: ", workout);
+    this.selectedWorkout = workout;
   }
 
 }

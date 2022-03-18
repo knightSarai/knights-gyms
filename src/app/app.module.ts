@@ -12,6 +12,7 @@ import { WorkoutComponent } from './workouts/workout-list/workout/workout.compon
 import { EquipmentsComponent } from './equipments/equipments.component';
 import { EquipmentEditComponent } from './equipments/equipment-edit/equipment-edit.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

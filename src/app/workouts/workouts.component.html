@@ -1,8 +1,14 @@
 <div class="row">
   <div class="col-md-7">
-    <app-workout-list></app-workout-list>
+    <app-workout-list (workoutSelected)="onWorkoutSelected($event)"></app-workout-list>
   </div>
   <div class="col-md-5">
-    <app-workout-detail></app-workout-detail>
+    <app-workout-detail *ngIf="selectedWorkout; else elseBlock"
+                        [workout]="selectedWorkout"
+    >
+    </app-workout-detail>
+    <ng-template #elseBlock>
+      <h3>No workout selected</h3>
+    </ng-template>
   </div>
 </div>

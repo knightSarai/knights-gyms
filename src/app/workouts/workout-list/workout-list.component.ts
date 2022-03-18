@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Workout} from "@models/workouts.model";
 
 @Component({
@@ -7,6 +7,7 @@ import {Workout} from "@models/workouts.model";
   styleUrls: ['./workout-list.component.css']
 })
 export class WorkoutListComponent implements OnInit {
+  @Output() workoutSelected = new EventEmitter<Workout>();
   workouts: Workout[] = [
     new Workout(
       1,
@@ -35,4 +36,8 @@ export class WorkoutListComponent implements OnInit {
     console.log(this.workouts);
   }
 
+  onWorkoutSelected(workout: Workout) {
+    console.log("knight", workout);
+    this.workoutSelected.emit(workout);
+  }
 }
