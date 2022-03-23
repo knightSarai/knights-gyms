@@ -3,17 +3,14 @@
     <div>
       <h1>{{ workout.name }}</h1>
     </div>
-    <div class="dropdown">
+    <div appDropdown class="dropdown" >
       <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
               type="button"
               id="manageWorkoutButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
       >
         Manage Workout
       </button>
       <ul class="dropdown-menu"
-          aria-labelledby="manageWorkoutDropdown"
       >
         <li>
           <a class="dropdown-item"

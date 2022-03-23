@@ -13,6 +13,7 @@ import { EquipmentsComponent } from './equipments/equipments.component';
 import { EquipmentEditComponent } from './equipments/equipment-edit/equipment-edit.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {FormsModule} from "@angular/forms";
+import { DropdownDirective } from './directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {FormsModule} from "@angular/forms";
     WorkoutDetailComponent,
     WorkoutComponent,
     EquipmentsComponent,
-    EquipmentEditComponent
+    EquipmentEditComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
