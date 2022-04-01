@@ -3,7 +3,9 @@
     <div>
       <h1>{{ workout.name }}</h1>
     </div>
-    <div appDropdown class="dropdown" >
+    <div appDropdown
+         class="dropdown"
+    >
       <button class="btn btn-sm btn-outline-secondary dropdown-toggle"
               type="button"
               id="manageWorkoutButton"
@@ -14,7 +16,7 @@
       >
         <li>
           <a class="dropdown-item"
-             href="#"
+             (click)="addWorkoutEquipmentToList()"
           >
             Add To Equipment list
           </a>
@@ -43,6 +45,16 @@
     </div>
     <div class="col-md-12">
       <p>{{workout.details}}</p>
+    </div>
+    <div class="col-md-12">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+            *ngFor="let equipment of workout.equipments"
+        >
+          {{ equipment.name }}
+          <span class="badge bg-primary rounded-pill">{{ equipment.amount }}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

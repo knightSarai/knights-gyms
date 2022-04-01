@@ -21,7 +21,7 @@ export class EquipmentEditComponent implements OnInit {
     const equipmentName = this.equipmentNameRef.nativeElement.value;
     const equipmentAmount = this.equipmentAmountRef.nativeElement.value;
     const equipment = new Equipment(equipmentName, equipmentAmount);
-    this.equipmentService.addEquipment(equipment);
+    this.equipmentService.addEquipments([equipment]);
     this.equipmentNameRef.nativeElement.value = '';
     this.equipmentAmountRef.nativeElement.value = '';
   }

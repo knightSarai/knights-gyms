@@ -6,10 +6,7 @@ import {Equipment} from "@models/equipment.model";
 })
 export class EquipmentsService {
   equipmentChanged = new EventEmitter<Equipment[]>();
-  private equipments: Equipment[] = [
-    new Equipment('pull up bar', 1),
-    new Equipment('dumbbell', 2),
-  ];
+  private equipments: Equipment[] = [];
 
   constructor() { }
 
@@ -17,8 +14,8 @@ export class EquipmentsService {
     return [...this.equipments];
   }
 
-  addEquipment(equipment: Equipment) {
-    this.equipments.push(equipment);
+  addEquipments(equipments: Equipment[]) {
+    this.equipments= [...this.equipments, ...equipments];
     this.equipmentChanged.emit([...this.equipments])
   }
 }
