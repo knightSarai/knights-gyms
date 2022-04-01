@@ -1,5 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Workout} from "@models/workouts.model";
+import {WorkoutService} from "../workout.service";
 
 @Component({
   selector: 'app-workout-list',
@@ -7,37 +8,11 @@ import {Workout} from "@models/workouts.model";
   styleUrls: ['./workout-list.component.css']
 })
 export class WorkoutListComponent implements OnInit {
-  @Output() workoutSelected = new EventEmitter<Workout>();
-  workouts: Workout[] = [
-    new Workout(
-      1,
-      'Knight Workout I',
-      new Date(),
-      '20x Pull Ups'
-    ),
-    new Workout(
-      2,
-      'Knight Workout II',
-      new Date(),
-      '30x Push Ups'
-    ),
-    new Workout(
-      3,
-      'Knight Workout II',
-      new Date(),
-      '30x Push Ups'
-    ),
-  ];
-
-  constructor() {
+  workouts: Workout[];
+  constructor(private workoutService: WorkoutService) {
   }
 
-  ngOnInit(): void {
-    console.log(this.workouts);
-  }
-
-  onWorkoutSelected(workout: Workout) {
-    console.log("knight", workout);
-    this.workoutSelected.emit(workout);
+  ngOnInit(){
+     this.workouts = this.workoutService.getWorkouts();
   }
 }

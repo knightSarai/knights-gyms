@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Workout} from "@models/workouts.model";
+import {WorkoutService} from "./workout.service";
 
 @Component({
   selector: 'app-workouts',
@@ -9,14 +10,15 @@ import {Workout} from "@models/workouts.model";
 export class WorkoutsComponent implements OnInit {
   selectedWorkout: Workout;
 
-  constructor() {
+  constructor(private workoutService: WorkoutService) {
   }
 
   ngOnInit(): void {
+    this.workoutService.workoutSelected
+      .subscribe((workout: Workout) => this.selectedWorkout = workout);
   }
 
   onWorkoutSelected(workout: Workout) {
-    console.log("Workout selected: ", workout);
     this.selectedWorkout = workout;
   }
 

@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Workout} from "@models/workouts.model";
+import {WorkoutService} from "../../workout.service";
 
 @Component({
   selector: 'app-workout',
@@ -8,10 +9,11 @@ import {Workout} from "@models/workouts.model";
 })
 export class WorkoutComponent {
   @Input() workout: Workout;
-  @Output() workoutSelected = new EventEmitter<void>();
 
-  onWorkoutSelected() {
-    this.workoutSelected.emit();
+  constructor(private workoutService: WorkoutService) {
   }
 
+  onWorkoutSelected() {
+    this.workoutService.workoutSelected.emit(this.workout);
+  }
 }

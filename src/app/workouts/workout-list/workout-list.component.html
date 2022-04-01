@@ -8,7 +8,6 @@
     <div class="list-group mt-3 mb-3">
       <app-workout *ngFor="let workout of workouts"
                    [workout]="workout"
-                   (workoutSelected)="onWorkoutSelected(workout)"
       ></app-workout>
     </div>
   </div>
