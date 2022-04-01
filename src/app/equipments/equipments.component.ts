@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Equipment} from "../models/equipment.model";
+import {EquipmentsService} from "./equipments.service";
 
 @Component({
   selector: 'app-equipments',
@@ -7,19 +8,14 @@ import {Equipment} from "../models/equipment.model";
   styleUrls: ['./equipments.component.css']
 })
 export class EquipmentsComponent implements OnInit {
-  equipments: Equipment[] = [
-    new Equipment('pull up bar', 1),
-    new Equipment('dumbbell', 2),
-  ];
+  equipments: Equipment[];
 
-  constructor() {
+  constructor(private equipmentService: EquipmentsService) {
   }
 
   ngOnInit(): void {
+    this.equipments = this.equipmentService.getEquipments()
+    this.equipmentService.equipmentChanged
+      .subscribe((equipments: Equipment[]) => this.equipments = equipments)
   }
-
-  onEquipmentAdded(equipment: Equipment) {
-    this.equipments.push(equipment);
-  }
-
 }

@@ -1,5 +1,6 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Equipment} from "@models/equipment.model";
+import {EquipmentsService} from "../equipments.service";
 
 @Component({
   selector: 'app-equipment-edit',
@@ -9,9 +10,9 @@ import {Equipment} from "@models/equipment.model";
 export class EquipmentEditComponent implements OnInit {
   @ViewChild('equipmentName') equipmentNameRef: ElementRef;
   @ViewChild('equipmentAmount') equipmentAmountRef: ElementRef;
-  @Output() equipmentAdded = new EventEmitter<Equipment>();
 
-  constructor() { }
+  constructor(private equipmentService: EquipmentsService) {
+  }
 
   ngOnInit(): void {
   }
@@ -20,7 +21,7 @@ export class EquipmentEditComponent implements OnInit {
     const equipmentName = this.equipmentNameRef.nativeElement.value;
     const equipmentAmount = this.equipmentAmountRef.nativeElement.value;
     const equipment = new Equipment(equipmentName, equipmentAmount);
-    this.equipmentAdded.emit(equipment);
+    this.equipmentService.addEquipment(equipment);
     this.equipmentNameRef.nativeElement.value = '';
     this.equipmentAmountRef.nativeElement.value = '';
   }
