@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-xxl">
-    <a class="navbar-brand"
-       href="#"
-    >
+    <a class="navbar-brand">
       Knights Gym
     </a>
     <button class="navbar-toggler"
@@ -19,30 +17,30 @@
          id="navbarSupportedContent"
     >
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item"
+            routerLinkActive="active"
+        >
           <a class="nav-link"
-             href="#"
-             (click)="selectPage('Workouts')"
+             routerLink="/workouts"
           >
             Workouts
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item"
+            routerLinkActive="active"
+        >
           <a class="nav-link"
-             href="#"
-             (click)="selectPage('Equipments')"
+             routerLink="/equipments"
           >
             Equipments
           </a>
         </li>
-
       </ul>
       <ul appDropdown
           class="navbar-nav d-flex"
       >
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"
-             href="#"
              id="navbarDropdown"
              role="button"
              data-bs-toggle="dropdown"
@@ -55,7 +53,7 @@
           >
             <li>
               <a class="dropdown-item"
-                 href="#"
+                 style="cursor: pointer"
               >
                 Save a workout
               </a>
@@ -65,7 +63,7 @@
             </li>
             <li>
               <a class="dropdown-item"
-                 href="#"
+                 style="cursor: pointer"
               >
                 Get workouts
               </a>

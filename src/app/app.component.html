@@ -1,5 +1,4 @@
-<app-header (pageSelected)="onPageSelected($event)"></app-header>
+<app-header></app-header>
 <div class="container-xxl mt-4">
-  <app-workouts *ngIf="pageName === 'Workouts'"></app-workouts>
-  <app-equipments *ngIf="pageName === 'Equipments'"></app-equipments>
+  <router-outlet></router-outlet>
 </div>
