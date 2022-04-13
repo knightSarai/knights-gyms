@@ -44,8 +44,17 @@ export class WorkoutService {
   }
 
   getWorkout(id: number) {
-    const workout = {...this.workouts.find(workout => workout.id === id)};
-    console.log(workout);
-    return workout;
+    return {...this.workouts.find(workout => workout.id === id)};
   }
+
+  addWorkout(workout: Workout) {
+    workout.id = this.workouts.length + 1;
+    this.workouts.push(workout);
+  }
+
+  updateWorkout(workout: Workout) {
+    const index = this.workouts.findIndex(w => w.id === workout.id);
+    this.workouts[index] = workout;
+  }
+
 }

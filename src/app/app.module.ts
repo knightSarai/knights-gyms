@@ -15,6 +15,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
 import {FormsModule} from "@angular/forms";
 import {DropdownDirective} from './directives/dropdown.directive';
 import {RoutingModule} from "./routing/routing.module";
+import { WorkoutIndexComponent } from './workouts/workout-index/workout-index.component';
+import { WorkoutEditComponent } from './workouts/workout-edit/workout-edit.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {RoutingModule} from "./routing/routing.module";
     WorkoutComponent,
     EquipmentsComponent,
     EquipmentEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    WorkoutIndexComponent,
+    WorkoutEditComponent
   ],
   imports: [
     BrowserModule,
