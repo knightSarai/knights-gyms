@@ -12,8 +12,4 @@ export class WorkoutComponent {
 
   constructor(private workoutService: WorkoutService) {
   }
-
-  onWorkoutSelected() {
-    this.workoutService.workoutSelected.emit(this.workout);
-  }
 }

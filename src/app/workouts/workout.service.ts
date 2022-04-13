@@ -42,4 +42,10 @@ export class WorkoutService {
   addEquipmentsToList(equipments: Equipment[]) {
     this.equipmentsService.addEquipments(equipments)
   }
+
+  getWorkout(id: number) {
+    const workout = {...this.workouts.find(workout => workout.id === id)};
+    console.log(workout);
+    return workout;
+  }
 }

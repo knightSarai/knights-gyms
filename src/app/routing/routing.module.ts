@@ -1,12 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {Routes, RouterModule} from "@angular/router";
 import {WorkoutsComponent} from "../workouts/workouts.component";
 import {EquipmentsComponent} from "../equipments/equipments.component";
+import {WorkoutIndexComponent} from "../workouts/workout-index/workout-index.component";
+import {WorkoutDetailComponent} from "../workouts/workout-detail/workout-detail.component";
 
 const routs: Routes = [
   {path: '', redirectTo: 'workouts', pathMatch: 'full'},
-  {path: 'workouts', component: WorkoutsComponent},
+  {
+    path: 'workouts', component: WorkoutsComponent, children: [
+      {path: '', component: WorkoutIndexComponent},
+      {path: ':id', component: WorkoutDetailComponent}
+    ]
+  },
   {path: 'equipments', component: EquipmentsComponent},
 ]
 
@@ -18,4 +25,5 @@ const routs: Routes = [
   ],
   exports: [RouterModule]
 })
-export class RoutingModule { }
+export class RoutingModule {
+}
