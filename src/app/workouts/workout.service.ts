@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Workout} from "@models/workouts.model";
 import {Equipment} from "@models/equipment.model";
 import {EquipmentsService} from "../equipments/equipments.service";
@@ -7,7 +7,6 @@ import {EquipmentsService} from "../equipments/equipments.service";
   providedIn: 'root'
 })
 export class WorkoutService {
-  workoutSelected = new EventEmitter<Workout>();
   private workouts: Workout[] = [
     new Workout(
       1,

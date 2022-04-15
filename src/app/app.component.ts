@@ -7,9 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'knights-gym';
-  pageName = 'Workouts';
-
-  onPageSelected($event: {pageName: string}) {
-    this.pageName = $event.pageName;
-  }
 }

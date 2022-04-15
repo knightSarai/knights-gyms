@@ -1,11 +1,12 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Equipment} from "@models/equipment.model";
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EquipmentsService {
-  equipmentChanged = new EventEmitter<Equipment[]>();
+  equipmentChanged = new Subject<Equipment[]>();
   private equipments: Equipment[] = [];
 
   constructor() { }
@@ -16,6 +17,6 @@ export class EquipmentsService {
 
   addEquipments(equipments: Equipment[]) {
     this.equipments= [...this.equipments, ...equipments];
-    this.equipmentChanged.emit([...this.equipments])
+    this.equipmentChanged.next([...this.equipments])
   }
 }

@@ -14,12 +14,6 @@ export class WorkoutsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.workoutService.workoutSelected
-      .subscribe((workout: Workout) => this.selectedWorkout = workout);
-  }
-
-  onWorkoutSelected(workout: Workout) {
-    this.selectedWorkout = workout;
   }
 
 }
