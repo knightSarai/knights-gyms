@@ -1,11 +1,12 @@
 <div class="rows">
   <div class="col-xs-10">
+    <h2>Add Equipment to Your Inventory</h2>
     <app-equipment-edit></app-equipment-edit>
     <hr>
     <div class="col-md-4">
+      <h2>Inventory Equipment List</h2>
       <div class="list-group">
-        <a href="#"
-           class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+        <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
            *ngFor="let equipment of equipments"
         >
           {{equipment.name}}
