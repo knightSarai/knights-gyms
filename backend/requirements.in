@@ -1,0 +1,9 @@
+django
+djangorestframework
+python-dotenv
+coverage
+django-cors-headers
+autopep8
+pylint
+pylint-django
+pytest
