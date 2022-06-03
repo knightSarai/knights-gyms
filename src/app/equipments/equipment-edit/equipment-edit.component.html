@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <form>
+    <form (ngSubmit)="addEquipment(form)" #form="ngForm">
       <div class="row">
         <div class="col">
           <label for="equipment-name">Name</label>
@@ -8,7 +8,9 @@
                  class="form-control"
                  id="equipment-name"
                  placeholder="Name"
-                 #equipmentName
+                 name="name"
+                 ngModel
+                 required
           >
         </div>
         <div class="col">
@@ -17,7 +19,10 @@
                  class="form-control"
                  id="equipment-amount"
                  placeholder="Amount"
-                 #equipmentAmount
+                 name="amount"
+                 ngModel
+                 required
+                 min="1"
           >
         </div>
       </div>
@@ -25,7 +30,7 @@
         <div class="col mt-2">
           <button type="submit"
                   class="btn btn-sm btn-outline-success me-2"
-                  (click)="addEquipment()"
+                  [disabled]="!form.valid"
           >
             Add
           </button>

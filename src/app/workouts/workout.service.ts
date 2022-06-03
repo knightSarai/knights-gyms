@@ -13,25 +13,41 @@ export class WorkoutService {
       'Knight Workout I',
       new Date(),
       '20x Pull Ups',
-      [new Equipment('Pull Up Bar', 1)]
+      [new Equipment(1, 'Pull Up Bar', 1)]
     ),
     new Workout(
       2,
       'Knight Workout II',
       new Date(),
       '30x Push Ups',
-      [new Equipment('Band', 1)]
+      [new Equipment(2, 'Band', 1)]
     ),
     new Workout(
       3,
       'Knight Workout II',
       new Date(),
       '30x Dips',
-      [new Equipment('Dips Bar', 2)]
+      [new Equipment(3, 'Dips Bar', 2)]
     ),
   ];
 
   constructor(private equipmentsService: EquipmentsService) {
+  }
+
+  _createNewWorkout(workout: Workout, id: number = null) {
+    const newId = id ?? this.getNewId();
+    return new Workout(
+      newId,
+      workout.name,
+      workout.date,
+      workout.details,
+      workout.equipments
+    )
+  }
+
+
+  getNewId () {
+    return this.workouts.length + 1;
   }
 
   getWorkouts() {
@@ -39,7 +55,7 @@ export class WorkoutService {
   }
 
   addEquipmentsToList(equipments: Equipment[]) {
-    this.equipmentsService.addEquipments(equipments)
+    this.equipmentsService.addEquipments(equipments);
   }
 
   getWorkout(id: number) {
@@ -47,13 +63,15 @@ export class WorkoutService {
   }
 
   addWorkout(workout: Workout) {
-    workout.id = this.workouts.length + 1;
-    this.workouts.push(workout);
+    const newWorkout = this._createNewWorkout(workout);
+    this.workouts.push(newWorkout);
   }
 
   updateWorkout(workout: Workout) {
+    const workouts = [...this.workouts];
     const index = this.workouts.findIndex(w => w.id === workout.id);
-    this.workouts[index] = workout;
-  }
 
+    workouts[index] = workout;
+    this.workouts = workouts;
+  }
 }

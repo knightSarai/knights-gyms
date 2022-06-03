@@ -1,4 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import {Equipment} from "@models/equipment.model";
 import {EquipmentsService} from "../equipments.service";
 
@@ -8,8 +9,6 @@ import {EquipmentsService} from "../equipments.service";
   styleUrls: ['./equipment-edit.component.css']
 })
 export class EquipmentEditComponent implements OnInit {
-  @ViewChild('equipmentName') equipmentNameRef: ElementRef;
-  @ViewChild('equipmentAmount') equipmentAmountRef: ElementRef;
 
   constructor(private equipmentService: EquipmentsService) {
   }
@@ -17,13 +16,10 @@ export class EquipmentEditComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addEquipment() {
-    const equipmentName = this.equipmentNameRef.nativeElement.value;
-    const equipmentAmount = this.equipmentAmountRef.nativeElement.value;
-    const equipment = new Equipment(equipmentName, equipmentAmount);
-    this.equipmentService.addEquipments([equipment]);
-    this.equipmentNameRef.nativeElement.value = '';
-    this.equipmentAmountRef.nativeElement.value = '';
+  addEquipment(form: NgForm) {
+    const {value} = form;
+    const equipment = new Equipment(null, value.name, value.amount) 
+    this.equipmentService.addEquipment(equipment);
   }
 
 }
