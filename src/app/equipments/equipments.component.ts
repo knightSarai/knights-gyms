@@ -12,16 +12,25 @@ export class EquipmentsComponent implements OnInit, OnDestroy {
   equipments: Equipment[];
   private equipmentChangedSub: Subscription;
 
-  constructor(private equipmentService: EquipmentsService) {
+  constructor(private equipmentsService: EquipmentsService) {
   }
 
   ngOnInit(): void {
-    this.equipments = this.equipmentService.getEquipments()
-    this.equipmentChangedSub = this.equipmentService.equipmentChanged
+    this.equipments = this.equipmentsService.getEquipments()
+    this.equipmentChangedSub = this.equipmentsService.equipmentChanged
       .subscribe((equipments: Equipment[]) => this.equipments = equipments)
   }
 
   ngOnDestroy(): void {
     this.equipmentChangedSub.unsubscribe()
+  }
+  
+  onEquipementEdit(id: number){
+    this.equipmentsService.editingStarted.next(id);
+  }
+
+  deleteEquipment(event: Event, id: number) {
+    event.stopPropagation();
+    this.equipmentsService.deleteEquipment(id);
   }
 }

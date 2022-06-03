@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <form (ngSubmit)="addEquipment(form)" #form="ngForm">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
       <div class="row">
         <div class="col">
           <label for="equipment-name">Name</label>
@@ -32,15 +32,18 @@
                   class="btn btn-sm btn-outline-success me-2"
                   [disabled]="!form.valid"
           >
-            Add
+            {{editMode ? 'Update' : 'Add'}}
           </button>
           <button type="button"
                   class="btn btn-sm btn-outline-danger me-2"
+                  *ngIf="editEquipment"
+                  (click)="deleteEquipment(editEquipment.id)"
           >
             Delete
           </button>
           <button type="button"
                   class="btn btn-sm btn-outline-primary"
+                  (click)="clear()"
           >
             Clear
           </button>

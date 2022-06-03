@@ -8,6 +8,7 @@ import {Subject} from "rxjs";
 export class EquipmentsService {
   private equipments: Equipment[] = [];
   equipmentChanged = new Subject<Equipment[]>();
+  editingStarted = new Subject<number>();
 
   constructor() { }
 
@@ -26,6 +27,10 @@ export class EquipmentsService {
 
   getEquipments(): Equipment[] {
     return [...this.equipments];
+  }
+
+  getEquipment(id: number) {
+    return this.equipments.find(equipment => equipment.id === id)
   }
 
   getNewId(){
@@ -49,4 +54,19 @@ export class EquipmentsService {
     })
     this._addToList(newEquipments)
   }
+
+  updateEquipment(newEquipment: Equipment) {
+    const equipments = [...this.equipments]
+    const idx = equipments.findIndex(equipment => equipment.id === newEquipment.id)
+    equipments[idx] = newEquipment;
+    this.equipments = equipments;
+    this._onEquipmentsChanged()
+  }
+
+  deleteEquipment(id: number) {
+    this.equipments = this.equipments.filter(equipment => equipment.id !== id);
+    this._onEquipmentsChanged()
+  }
+
+
 }
