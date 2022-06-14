@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../workout.service";
 import {ActivatedRoute} from "@angular/router";
 import {Workout} from "@models/workouts.model";
-import { FormArray, FormControl,  FormControlName,  FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common'
 import { Equipment } from '@models/equipment.model';
 
@@ -36,8 +36,11 @@ export class WorkoutEditComponent implements OnInit {
     const name = equipment ? equipment.name : '';
     const amount = equipment ? equipment.amount : 0;
     return new FormGroup({
-            'name': new FormControl(name),
-            'amount': new FormControl(amount)
+            'name': new FormControl(name, Validators.required),
+            'amount': new FormControl(amount, [
+               Validators.required,
+               Validators.pattern(/^[0-9]+[1-9]*$/)
+             ])
           })
     
   }
@@ -49,8 +52,8 @@ export class WorkoutEditComponent implements OnInit {
     }
 
     this.workoutForm = new FormGroup({
-      "name": new FormControl(this.workout.name),
-      "date": new FormControl(formatDate(this.workout.date, 'yyy-MM-dd', 'en')),
+      "name": new FormControl(this.workout.name, Validators.required),
+      "date": new FormControl(formatDate(this.workout.date, 'yyy-MM-dd', 'en'), Validators.required),
       "details": new FormControl(this.workout.details),
       equipments
     })
