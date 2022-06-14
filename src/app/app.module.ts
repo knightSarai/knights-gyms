@@ -12,7 +12,7 @@ import {WorkoutComponent} from './workouts/workout-list/workout/workout.componen
 import {EquipmentsComponent} from './equipments/equipments.component';
 import {EquipmentEditComponent} from './equipments/equipment-edit/equipment-edit.component';
 import {MatGridListModule} from "@angular/material/grid-list";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DropdownDirective} from './directives/dropdown.directive';
 import {RoutingModule} from "./routing/routing.module";
 import { WorkoutIndexComponent } from './workouts/workout-index/workout-index.component';
@@ -37,6 +37,7 @@ import { WorkoutEditComponent } from './workouts/workout-edit/workout-edit.compo
     BrowserAnimationsModule,
     MatToolbarModule,
     MatGridListModule,
+    ReactiveFormsModule,
     FormsModule,
     RoutingModule
   ],

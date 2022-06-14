@@ -20,7 +20,7 @@ export class WorkoutService {
       'Knight Workout II',
       new Date(),
       '30x Push Ups',
-      [new Equipment(2, 'Band', 1)]
+      [new Equipment(2, 'Band', 1), new Equipment(4, 'Mat', 1) ]
     ),
     new Workout(
       3,
