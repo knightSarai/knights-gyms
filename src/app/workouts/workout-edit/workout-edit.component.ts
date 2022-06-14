@@ -60,7 +60,12 @@ export class WorkoutEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.workoutForm)
+    if (this.workout.id) {
+      this.workoutService.updateWorkout({id: this.workout.id, ...this.workoutForm.value})
+    } else {
+      this.workoutService.addWorkout(this.workoutForm.value)
+    }
+
   }
 
   onAddEquipment() {

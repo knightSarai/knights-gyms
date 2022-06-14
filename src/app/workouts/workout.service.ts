@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {Workout} from "@models/workouts.model";
 import {Equipment} from "@models/equipment.model";
 import {EquipmentsService} from "../equipments/equipments.service";
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutService {
+  workoutChanged = new Subject<Workout[]>();
   private workouts: Workout[] = [
     new Workout(
       1,
@@ -45,6 +47,18 @@ export class WorkoutService {
     )
   }
 
+  _onWorkoutsChanged() {
+    this.workoutChanged.next(this.getWorkouts())
+  }
+
+  _createNewWorkoutList(workouts: Workout[]) {
+    this.workouts = [...this.workouts, ...workouts]
+  }
+
+  _addToList(workouts: Workout[]) {
+    this._createNewWorkoutList(workouts)
+    this._onWorkoutsChanged()
+  }
 
   getNewId () {
     return this.workouts.length + 1;
@@ -64,7 +78,7 @@ export class WorkoutService {
 
   addWorkout(workout: Workout) {
     const newWorkout = this._createNewWorkout(workout);
-    this.workouts.push(newWorkout);
+    this._addToList([newWorkout])
   }
 
   updateWorkout(workout: Workout) {
@@ -73,5 +87,6 @@ export class WorkoutService {
 
     workouts[index] = workout;
     this.workouts = workouts;
+    this._onWorkoutsChanged()
   }
 }
