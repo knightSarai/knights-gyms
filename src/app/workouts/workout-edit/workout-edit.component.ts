@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkoutService} from "../workout.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {Workout} from "@models/workouts.model";
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common'
@@ -17,8 +17,11 @@ export class WorkoutEditComponent implements OnInit {
   editMode: boolean;
   workoutForm: FormGroup;
 
-  constructor(private workoutService: WorkoutService, private route: ActivatedRoute) {
-  }
+  constructor(
+    private workoutService: WorkoutService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   get controls() {
     return (<FormArray>this.workoutForm.get('equipments')).controls;
@@ -66,11 +69,12 @@ export class WorkoutEditComponent implements OnInit {
       this.workoutService.addWorkout(this.workoutForm.value)
     }
 
+    this.onCancel()
+
   }
 
   onAddEquipment() {
     (<FormArray>this.workoutForm.get('equipments')).push(this.createEquipmentFormGroup())
-
   }
   
   
@@ -80,6 +84,10 @@ export class WorkoutEditComponent implements OnInit {
 
   updateWorkout(workout: Workout) {
     this.workoutService.updateWorkout(workout);
+  }
+
+  onCancel() {
+    this.router.navigate(['../'], {relativeTo: this.route})
   }
 
 }

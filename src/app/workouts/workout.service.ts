@@ -89,4 +89,9 @@ export class WorkoutService {
     this.workouts = workouts;
     this._onWorkoutsChanged()
   }
+
+  deleteWorkout(id: number) {
+    this.workouts = this.workouts.filter(workout => workout.id !== id)
+    this._onWorkoutsChanged()
+  }
 }

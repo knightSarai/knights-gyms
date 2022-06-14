@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Workout} from "@models/workouts.model";
 import {WorkoutService} from "../workout.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-workout-detail',
@@ -11,8 +11,11 @@ import {ActivatedRoute} from "@angular/router";
 export class WorkoutDetailComponent implements OnInit {
   workout: Workout;
 
-  constructor(private workoutService: WorkoutService, private route: ActivatedRoute) {
-  }
+  constructor(
+    private workoutService: WorkoutService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -22,5 +25,10 @@ export class WorkoutDetailComponent implements OnInit {
 
   addWorkoutEquipmentToList() {
     this.workoutService.addEquipmentsToList(this.workout.equipments);
+  }
+
+  deleteWorkout() {
+    this.workoutService.deleteWorkout(this.workout.id)
+    this.router.navigate(['/workouts']);
   }
 }
