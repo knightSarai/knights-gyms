@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {WorkoutService} from "../workout.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Workout} from "@models/workouts.model";
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common'
 import { Equipment } from '@models/equipment.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,10 +13,11 @@ import { Equipment } from '@models/equipment.model';
   templateUrl: './workout-edit.component.html',
   styleUrls: ['./workout-edit.component.css']
 })
-export class WorkoutEditComponent implements OnInit {
+export class WorkoutEditComponent implements OnInit, OnDestroy {
   workout: Workout;
   editMode: boolean;
   workoutForm: FormGroup;
+  subscribtion: Subscription;
 
   constructor(
     private workoutService: WorkoutService,
@@ -28,7 +30,7 @@ export class WorkoutEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.subscribtion = this.route.params.subscribe(params => {
       this.editMode = params['id'] != null;
       this.workout = this.editMode ? this.workoutService.getWorkout(parseInt(params.id)) : new Workout();
       this.initForm()
@@ -70,11 +72,15 @@ export class WorkoutEditComponent implements OnInit {
     }
 
     this.onCancel()
-
   }
 
   onAddEquipment() {
     (<FormArray>this.workoutForm.get('equipments')).push(this.createEquipmentFormGroup())
+  }
+
+
+  deleteEquipment(idx: number) {
+    (<FormArray>this.workoutForm.get('equipments')).removeAt(idx)
   }
   
   
@@ -88,6 +94,10 @@ export class WorkoutEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
+  ngOnDestroy(): void {
+    this.subscribtion.unsubscribe();
   }
 
 }
