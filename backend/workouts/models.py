@@ -6,5 +6,7 @@ class Workout(models.Model):
     date = models.DateTimeField('Created at', auto_now_add=True, editable=False)
     updated_at = models.DateTimeField('Updated at', auto_now=True)
     details = models.TextField('Details')
-    equipments = models.TextField('Equipments')
+
+    def __str__(self):
+        return self.name
 

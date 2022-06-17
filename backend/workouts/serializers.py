@@ -6,4 +6,4 @@ from .models import Workout
 class WorkoutSerializer(serializers.ModelSerializer):
     class Meta:
         model = Workout
-        fields = ["id", "name", "details", "equipments", "date"]
+        fields = ["id", "name", "details", "date"]
