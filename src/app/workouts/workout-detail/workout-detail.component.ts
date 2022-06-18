@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class WorkoutDetailComponent implements OnInit, OnDestroy {
   workout: Workout;
-  subscribtion: Subscription
+  subscribtion: Subscription;
 
   constructor(
     private workoutService: WorkoutService,
@@ -20,7 +20,7 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.subscribtion = this.route.params.subscribe(params => {
       this.workout = this.workoutService.getWorkout(parseInt(params.id))
     });
   }
