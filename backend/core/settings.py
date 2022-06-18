@@ -79,6 +79,9 @@ AUTH_PASSWORD_VALIDATORS = [
   },
 ]
 
+REST_FRAMEWORK = {
+  'EXCEPTION_HANDLER': 'base.exceptions.main.handle_value_error',
+}
 CORS_ALLOWED_ORIGIN = (
   'http://localhost:3000'
 )

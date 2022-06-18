@@ -42,10 +42,3 @@ class WorkoutListView(generics.ListCreateAPIView):
         headers = self.get_success_headers(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    # create workout and update the WorkoutEquipment table with the new workout id and equipment id and the amount
-    # def create(self, validated_data):
-    #   workout = Workout.objects.create(name=validated_data["name"], details=validated_data["details"])
-    #   for equipment in validated_data["equipments"]:
-    #     WorkoutEquipment.objects.create(workout=workout, **equipment)
-    #   return workout
