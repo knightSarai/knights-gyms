@@ -7,3 +7,4 @@ autopep8
 pylint
 pylint-django
 pytest
+pydantic

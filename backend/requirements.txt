@@ -41,6 +41,8 @@ py==1.11.0
     # via pytest
 pycodestyle==2.8.0
     # via autopep8
+pydantic==1.9.1
+    # via -r requirements.in
 pylint==2.12.2
     # via
     #   -r requirements.in
@@ -68,6 +70,7 @@ toml==0.10.2
 typing-extensions==4.0.1
     # via
     #   astroid
+    #   pydantic
     #   pylint
 wrapt==1.13.3
     # via astroid
