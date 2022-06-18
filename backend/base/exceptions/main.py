@@ -11,6 +11,6 @@ def handle_value_error(exc, context):
 
     if isinstance(exc, ValueError):
         logging.error(f"Original error detail and callstack: {exc}")
-        return JsonResponse({'errors': format_pydantic_value_error(exc)}, status=400)
+        return JsonResponse(format_pydantic_value_error(exc), status=400)
 
     return response

@@ -20,7 +20,9 @@ class WorkoutListView(generics.ListCreateAPIView):
         with transaction.atomic():
             equipments = [
                 {
-                    "object": Equipment.objects.get_or_create(**equipment_schema.dict(exclude_unset=True, exclude={'amount'}))[0],
+                    "object": Equipment.objects.get_or_create(
+                        **equipment_schema.dict(exclude_unset=True, exclude={'amount'})
+                    )[0],
                     "amount": equipment_schema.amount
                 }
                 for equipment_schema in equipment_schemas

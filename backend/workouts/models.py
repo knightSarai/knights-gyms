@@ -10,4 +10,4 @@ class Workout(MasterModel):
 class WorkoutEquipment(BaseModel):
     workout = models.ForeignKey('workouts.Workout', related_name="workout_equipments", on_delete=models.CASCADE, null=True)
     equipment = models.ForeignKey('equipments.Equipment', related_name="workout_equipments", on_delete=models.CASCADE, null=True)
-    amount = models.CharField('Amount', max_length=255, null=False)
+    amount = models.IntegerField('Amount', default=1, null=False)
