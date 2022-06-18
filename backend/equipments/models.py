@@ -7,7 +7,5 @@ class Equipment(MasterModel):
 
 
 class EquipmentCount(MasterModel):
-    my_equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE, related_name="equipment_counts")
-    amount = models.IntegerField('Amount', default=1, null=False)
-
-
+    my_equipment = models.OneToOneField(Equipment, on_delete=models.CASCADE, related_name="equipment_counts")
+    amount = models.IntegerField('Amount', default=0, null=False)

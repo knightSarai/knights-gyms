@@ -11,3 +11,6 @@ class WorkoutEquipment(BaseModel):
     workout = models.ForeignKey('workouts.Workout', related_name="workout_equipments", on_delete=models.CASCADE, null=True)
     equipment = models.ForeignKey('equipments.Equipment', related_name="workout_equipments", on_delete=models.CASCADE, null=True)
     amount = models.IntegerField('Amount', default=1, null=False)
+
+    class Meta:
+        unique_together = ('equipment', 'workout',)
