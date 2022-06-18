@@ -1,12 +1,13 @@
 from django.db import models
+from base.models import BaseModel, MasterModel
 
 
-class Workout(models.Model):
-    name = models.CharField('Name', max_length=255, null=False) 
-    date = models.DateTimeField('Created at', auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField('Updated at', auto_now=True)
+class Workout(MasterModel):
     details = models.TextField('Details')
+    equipments = models.ManyToManyField('equipments.Equipment', through='WorkoutEquipment', related_name='all_equipments')
 
-    def __str__(self):
-        return self.name
 
+class WorkoutEquipment(BaseModel):
+    workout = models.ForeignKey('workouts.Workout', related_name="workout_equipments", on_delete=models.CASCADE, null=True)
+    equipment = models.ForeignKey('equipments.Equipment', related_name="workout_equipments", on_delete=models.CASCADE, null=True)
+    amount = models.CharField('Amount', max_length=255, null=False)

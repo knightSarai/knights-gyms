@@ -1,13 +1,8 @@
 from django.db import models
-from workouts.models import Workout
+from base.models import MasterModel
 
 
-class Equipment(models.Model):
-    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, null=True)
-    name = models.CharField('Name', max_length=255, null=False) 
-    amount = models.CharField('Amount', max_length=255, null=False) 
+class Equipment(MasterModel):
+    pass
 
-    def __str__(self):
-        return self.name
-    
 
