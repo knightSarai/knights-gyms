@@ -6,4 +6,5 @@ app_name = "equipments"
 urlpatterns = [
     path('', views.EquipmentListView.as_view(), name='equipment_list'),
     path('inventory/', views.EquipmentCountListView.as_view(), name='equipment_inventory_list'),
+    path('inventory/<int:pk>/', views.EquipmentCountDetailView.as_view(), name='equipment_inventory_detail'),
 ]
