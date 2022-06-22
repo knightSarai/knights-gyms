@@ -17,6 +17,8 @@ import {DropdownDirective} from './directives/dropdown.directive';
 import {RoutingModule} from "./routing/routing.module";
 import { WorkoutIndexComponent } from './workouts/workout-index/workout-index.component';
 import { WorkoutEditComponent } from './workouts/workout-edit/workout-edit.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { WorkoutEditComponent } from './workouts/workout-edit/workout-edit.compo
     MatGridListModule,
     ReactiveFormsModule,
     FormsModule,
-    RoutingModule
+    RoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
