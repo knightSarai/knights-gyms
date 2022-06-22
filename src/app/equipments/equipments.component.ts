@@ -19,6 +19,7 @@ export class EquipmentsComponent implements OnInit, OnDestroy {
     this.equipments = this.equipmentsService.getEquipments()
     this.equipmentChangedSub = this.equipmentsService.equipmentChanged
       .subscribe((equipments: Equipment[]) => this.equipments = equipments)
+    this.equipmentsService.fetchEquipments()
   }
 
   ngOnDestroy(): void {

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Equipment} from "@models/equipment.model";
 import {Subject} from "rxjs";
@@ -10,7 +11,7 @@ export class EquipmentsService {
   equipmentChanged = new Subject<Equipment[]>();
   editingStarted = new Subject<number>();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   _onEquipmentsChanged() {
     this.equipmentChanged.next([...this.equipments])
@@ -66,6 +67,14 @@ export class EquipmentsService {
   deleteEquipment(id: number) {
     this.equipments = this.equipments.filter(equipment => equipment.id !== id);
     this._onEquipmentsChanged()
+  }
+
+  fetchEquipments() {
+    this.http
+      .get<Equipment[]>('http://localhost:8000/api/equipments/inventory/')
+      .subscribe(equipments => {
+        console.log(equipments)
+      })
   }
 
 
