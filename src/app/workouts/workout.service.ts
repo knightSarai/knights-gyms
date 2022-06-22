@@ -3,6 +3,7 @@ import {Workout} from "@models/workouts.model";
 import {Equipment} from "@models/equipment.model";
 import {EquipmentsService} from "../equipments/equipments.service";
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +34,7 @@ export class WorkoutService {
     ),
   ];
 
-  constructor(private equipmentsService: EquipmentsService) {
+  constructor(private http: HttpClient, private equipmentsService: EquipmentsService) {
   }
 
   _createNewWorkout(workout: Workout, id: number = null) {
@@ -93,5 +94,14 @@ export class WorkoutService {
   deleteWorkout(id: number) {
     this.workouts = this.workouts.filter(workout => workout.id !== id)
     this._onWorkoutsChanged()
+  }
+
+  fetchWorkouts(){
+    return this.http
+      .get<Workout[]>('http://localhost:8000/api/workouts/')
+      .subscribe(workouts => {
+        console.log(workouts)
+      })
+
   }
 }

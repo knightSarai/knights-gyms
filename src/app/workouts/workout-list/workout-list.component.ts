@@ -15,5 +15,7 @@ export class WorkoutListComponent implements OnInit {
   ngOnInit(){
      this.workoutService.workoutChanged.subscribe((workouts: Workout[]) => this.workouts = workouts);
      this.workouts = this.workoutService.getWorkouts();
+
+     this.workoutService.fetchWorkouts()
   }
 }
