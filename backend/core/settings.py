@@ -89,10 +89,12 @@ SESSION_COOKIE_SAMESITE = "None" if DEBUG else "Lax"
 
 CORS_ALLOWED_ORIGINS = (
     'http://localhost:3000',
+    'http://localhost:4200',
 )
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
+    'http://localhost:4200',
 ]
 
 LANGUAGE_CODE = 'en-us'
