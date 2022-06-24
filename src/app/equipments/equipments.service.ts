@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Equipment} from "@models/equipment.model";
-import {Subject} from "rxjs";
+import {map, Subject} from "rxjs";
 
 
 export type EquipmentResponse = {id: number, name: string}
 export type WorkoutEquipmentResponse = {equipment:EquipmentResponse , amount: number}[]
+export type EquipmentInventory = {my_equipment: EquipmentResponse, amount: number}
 
 
 @Injectable({
@@ -18,7 +19,7 @@ export class EquipmentsService {
 
   constructor(private http: HttpClient) { }
 
-  _onEquipmentsChanged() {
+  private onEquipmentsChanged() {
     this.equipmentChanged.next([...this.equipments])
   }
 
@@ -28,7 +29,12 @@ export class EquipmentsService {
 
   _addToList(equipments: Equipment[]) {
     this._createNewEquipmentsList(equipments);
-    this._onEquipmentsChanged();
+    this.onEquipmentsChanged();
+  }
+
+  private setEquipment(equipment){
+    this.equipments = equipment
+    this.onEquipmentsChanged()
   }
 
   getEquipments(): Equipment[] {
@@ -66,20 +72,27 @@ export class EquipmentsService {
     const idx = equipments.findIndex(equipment => equipment.id === newEquipment.id)
     equipments[idx] = newEquipment;
     this.equipments = equipments;
-    this._onEquipmentsChanged()
+    this.onEquipmentsChanged()
   }
 
   deleteEquipment(id: number) {
     this.equipments = this.equipments.filter(equipment => equipment.id !== id);
-    this._onEquipmentsChanged()
+    this.onEquipmentsChanged()
   }
 
   fetchEquipments() {
     this.http
-      .get<Equipment[]>('http://localhost:8000/api/equipments/inventory/')
-      .subscribe(equipments => {
-        console.log(equipments)
-      })
+      .get<EquipmentInventory[]>('http://localhost:8000/api/equipments/inventory/')
+      .pipe(map(equipment => {
+        return equipment.map(({my_equipment, amount}) => {
+          return new Equipment(
+            my_equipment.id,
+            my_equipment.name,
+            amount
+          )
+        })
+      }))
+      .subscribe(equipment => this.setEquipment(equipment));
   }
 
 

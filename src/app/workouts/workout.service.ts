@@ -20,22 +20,16 @@ export class WorkoutService {
   workoutChanged = new Subject<Workout[]>();
   private workouts: Workout[] = [];
 
-  constructor(private http: HttpClient, private equipmentsService: EquipmentsService) {
+  constructor(private http: HttpClient, private equipmentsService: EquipmentsService) {}
+
+
+  private onWorkoutsChanged() {
+    this.workoutChanged.next(this.getWorkouts())
   }
 
-  // _createWorkout(workout: Workout, id: number = null) {
-  //   const newId = id ?? this.getNewId();
-  //   return new Workout(
-  //     newId,
-  //     workout.name,
-  //     workout.date,
-  //     workout.details,
-  //     workout.equipments
-  //   )
-  // }
-
-  _onWorkoutsChanged() {
-    this.workoutChanged.next(this.getWorkouts())
+  private setWorkouts(workouts: Workout[]) {
+    this.workouts = workouts;
+    this.onWorkoutsChanged()
   }
 
   _createNewWorkoutList(workouts: Workout[]) {
@@ -44,12 +38,7 @@ export class WorkoutService {
 
   _addToList(workouts: Workout[]) {
     this._createNewWorkoutList(workouts)
-    this._onWorkoutsChanged()
-  }
-
-  _setWorkouts(workouts: Workout[]) {
-    this.workouts = workouts;
-    this._onWorkoutsChanged()
+    this.onWorkoutsChanged()
   }
 
   getNewId () {
@@ -78,12 +67,12 @@ export class WorkoutService {
 
     workouts[index] = workout;
     this.workouts = workouts;
-    this._onWorkoutsChanged()
+    this.onWorkoutsChanged()
   }
 
   deleteWorkout(id: number) {
     this.workouts = this.workouts.filter(workout => workout.id !== id)
-    this._onWorkoutsChanged()
+    this.onWorkoutsChanged()
   }
 
   fetchWorkouts(){
@@ -109,8 +98,7 @@ export class WorkoutService {
         })
       }))
       .subscribe(workouts => {
-        this._setWorkouts(workouts)
+        this.setWorkouts(workouts)
       });
-
   }
 }
