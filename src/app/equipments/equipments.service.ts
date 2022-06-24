@@ -3,6 +3,11 @@ import {Injectable} from '@angular/core';
 import {Equipment} from "@models/equipment.model";
 import {Subject} from "rxjs";
 
+
+export type EquipmentResponse = {id: number, name: string}
+export type WorkoutEquipmentResponse = {equipment:EquipmentResponse , amount: number}[]
+
+
 @Injectable({
   providedIn: 'root'
 })

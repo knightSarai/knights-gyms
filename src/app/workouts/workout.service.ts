@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Workout} from "@models/workouts.model";
 import {Equipment} from "@models/equipment.model";
-import {EquipmentsService} from "../equipments/equipments.service";
+import {EquipmentsService, WorkoutEquipmentResponse} from "../equipments/equipments.service";
 import { map, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ interface WorkoutResponse {
   name: string;
   details: string;
   created: Date;
-  workout_equipment: [];
+  workout_equipment?: WorkoutEquipmentResponse;
 }
 
 @Injectable({
@@ -91,12 +91,20 @@ export class WorkoutService {
       .get<WorkoutResponse[]>('http://localhost:8000/api/workouts/')
       .pipe(map(workouts => {
         return workouts.map(workout => {
+          const newEquipment = workout.workout_equipment?.map(({equipment, amount})=> {
+              return new Equipment(
+                equipment.id,
+                equipment.name,
+                amount
+              )
+          }) ?? []
+
           return new Workout(
             workout.id,
             workout.name,
             workout.created,
             workout.details,
-            workout.workout_equipment,
+            newEquipment
           )
         })
       }))
