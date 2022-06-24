@@ -10,6 +10,8 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
 
 class EquipmentCountSerializer(serializers.ModelSerializer):
+    my_equipment = EquipmentSerializer()
+
     class Meta:
         model = EquipmentCount
         fields = ["id", "my_equipment", "amount"]
