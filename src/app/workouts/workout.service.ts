@@ -2,51 +2,37 @@ import {Injectable} from '@angular/core';
 import {Workout} from "@models/workouts.model";
 import {Equipment} from "@models/equipment.model";
 import {EquipmentsService} from "../equipments/equipments.service";
-import { Subject } from 'rxjs';
+import { map, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+
+interface WorkoutResponse {
+  id: number;
+  name: string;
+  details: string;
+  created: Date;
+  workout_equipment: [];
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutService {
   workoutChanged = new Subject<Workout[]>();
-  private workouts: Workout[] = [
-    new Workout(
-      1,
-      'Knight Workout I',
-      new Date(),
-      '20x Pull Ups',
-      [new Equipment(1, 'Pull Up Bar', 1)]
-    ),
-    new Workout(
-      2,
-      'Knight Workout II',
-      new Date(),
-      '30x Push Ups',
-      [new Equipment(2, 'Band', 1), new Equipment(4, 'Mat', 1) ]
-    ),
-    new Workout(
-      3,
-      'Knight Workout II',
-      new Date(),
-      '30x Dips',
-      [new Equipment(3, 'Dips Bar', 2)]
-    ),
-  ];
+  private workouts: Workout[] = [];
 
   constructor(private http: HttpClient, private equipmentsService: EquipmentsService) {
   }
 
-  _createNewWorkout(workout: Workout, id: number = null) {
-    const newId = id ?? this.getNewId();
-    return new Workout(
-      newId,
-      workout.name,
-      workout.date,
-      workout.details,
-      workout.equipments
-    )
-  }
+  // _createWorkout(workout: Workout, id: number = null) {
+  //   const newId = id ?? this.getNewId();
+  //   return new Workout(
+  //     newId,
+  //     workout.name,
+  //     workout.date,
+  //     workout.details,
+  //     workout.equipments
+  //   )
+  // }
 
   _onWorkoutsChanged() {
     this.workoutChanged.next(this.getWorkouts())
@@ -58,6 +44,11 @@ export class WorkoutService {
 
   _addToList(workouts: Workout[]) {
     this._createNewWorkoutList(workouts)
+    this._onWorkoutsChanged()
+  }
+
+  _setWorkouts(workouts: Workout[]) {
+    this.workouts = workouts;
     this._onWorkoutsChanged()
   }
 
@@ -78,8 +69,7 @@ export class WorkoutService {
   }
 
   addWorkout(workout: Workout) {
-    const newWorkout = this._createNewWorkout(workout);
-    this._addToList([newWorkout])
+    this._addToList([])
   }
 
   updateWorkout(workout: Workout) {
@@ -98,10 +88,21 @@ export class WorkoutService {
 
   fetchWorkouts(){
     return this.http
-      .get<Workout[]>('http://localhost:8000/api/workouts/')
+      .get<WorkoutResponse[]>('http://localhost:8000/api/workouts/')
+      .pipe(map(workouts => {
+        return workouts.map(workout => {
+          return new Workout(
+            workout.id,
+            workout.name,
+            workout.created,
+            workout.details,
+            workout.workout_equipment,
+          )
+        })
+      }))
       .subscribe(workouts => {
-        console.log(workouts)
-      })
+        this._setWorkouts(workouts)
+      });
 
   }
 }
